@@ -7,7 +7,7 @@ int match_count = 0;
 void find_combinations(int index, int current_sum, int target) {
     if (current_sum == target) {
         printf("%2d TD + 2pt, %2d TD + FG, %2d TD, %2d 3pts FG, %2d Safety\n", 
-               counts[0], counts[1], counts[2], counts[3], counts[4]);
+                counts[0], counts[1], counts[2], counts[3], counts[4]);
         match_count++;
         return;
     }
@@ -26,13 +26,25 @@ void find_combinations(int index, int current_sum, int target) {
 
 int main() {
     int target;
+    int status;
     
     while (1) {
         printf("Enter the NFL score (Enter 1 to stop): ");
-        scanf("%d", &target);
+        status = scanf("%d", &target);
         
+        if (status != 1) {
+            printf("Invalid input! Please enter an integer.\n\n");
+            while (getchar() != '\n');
+            continue;
+        }
+
         if (target == 1) {
             break;
+        }
+
+        if (target < 0) {
+            printf("Invalid score! Score cannot be negative.\n\n");
+            continue;
         }
 
         match_count = 0;
